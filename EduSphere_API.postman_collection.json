@@ -1,0 +1,291 @@
+{
+  "info": {
+    "name": "EduSphere API",
+    "description": "EduSphere API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://educationsphere.vercel.app",
+      "type": "string"
+    },
+    {
+      "key": "apiUrl",
+      "value": "{{baseUrl}}/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"deviceId\": \"web_1234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{apiUrl}}/users/login",
+              "host": ["{{apiUrl}}"],
+              "path": ["users", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/users",
+              "host": ["{{apiUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/users/:userId",
+              "host": ["{{apiUrl}}"],
+              "path": ["users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "1234567890"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Users Pagination",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/users/pagination/list?page=1&limit=20&search=",
+              "host": ["{{apiUrl}}"],
+              "path": ["users", "pagination", "list"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Test User",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "test@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password123",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "student",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiUrl}}/users/create",
+              "host": ["{{apiUrl}}"],
+              "path": ["users", "create"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apiUrl}}/courses",
+              "host": ["{{apiUrl}}"],
+              "path": ["courses"]
+            }
+          }
+        },
+        {
+          "name": "Get Courses Pagination",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/courses/getAllPagination?page=1&limit=20&search=",
+              "host": ["{{apiUrl}}"],
+              "path": ["courses", "getAllPagination"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Course by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/courses/:courseId",
+              "host": ["{{apiUrl}}"],
+              "path": ["courses", ":courseId"],
+              "variable": [
+                {
+                  "key": "courseId",
+                  "value": "1234567890"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sections",
+      "item": [
+        {
+          "name": "Get Sections by Course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/sections/sectionsByCourse/:courseId",
+              "host": ["{{apiUrl}}"],
+              "path": ["sections", "sectionsByCourse", ":courseId"],
+              "variable": [
+                {
+                  "key": "courseId",
+                  "value": "1234567890"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lectures",
+      "item": [
+        {
+          "name": "Get Lectures by Section",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/lectures/sectionLectures/:sectionId",
+              "host": ["{{apiUrl}}"],
+              "path": ["lectures", "sectionLectures", ":sectionId"],
+              "variable": [
+                {
+                  "key": "sectionId",
+                  "value": "1234567890"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enrollments",
+      "item": [
+        {
+          "name": "Get Enrollments by User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/enrollments/user/:userId",
+              "host": ["{{apiUrl}}"],
+              "path": ["enrollments", "user", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "1234567890"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
